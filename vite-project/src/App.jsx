@@ -1,36 +1,36 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
 
-const App = () => {
-  const name = 'Vite'
-  const x = 10
-  const y = 20
-  const loggedIn = false
-  const styles = {
-    color: 'red',
-    fontSize: '55px',
-  }
+// components
+import Hero from "./components/Hero"
+import Navbar from "./components/Navbar"
+import HomeCards from "./components/HomeCards"
+import JobListings from "./components/JobListings"
+import ViewAllJobs from "./components/ViewAllJobs"
 
-  const names = ['Brad', 'John', 'Jane', 'Smith']
+// pages
+import HomePage from './pages/HomePage'
+import JobsPage from './pages/JobsPage'
+import NotFoundPage from './pages/NotFoundPage'
 
-  return (
+// layouts
+import MainLayout from './layouts/MainLayout'
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
     <>
-    
-      <div className='text-5xl'>App</div>
-      <p style={styles}>Hello {name}</p>
-      <p>
-        The sum of {x} and {y} is {x + y} 
-      </p>
-
-      <ul>
-        {names.map((name, index) => (
-          <li key={index}>{name}</li>
-        ))}
-      </ul>
-
-      { loggedIn ? <p>Welcome User</p> : <p>Please log in</p> }
-  
+      <Route path='/' element={<MainLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path='/jobs' element={<JobsPage />} />
+        <Route path='*' element={<NotFoundPage />} />
+      </Route>
     </>
   )
-}
+
+);
+
+const App = () => {
+  return (<RouterProvider router={router} />)
+};
 
 export default App
